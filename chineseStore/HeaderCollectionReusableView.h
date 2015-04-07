@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  HeaderCollectionReusableView.h
 //  chineseStore
 //
 //  Created by Pablo Parejo Camacho on 28/3/15.
@@ -8,8 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
+@interface HeaderCollectionReusableView : UICollectionReusableView
 
-
+@property (weak, nonatomic) IBOutlet UILabel *sectionTitle;
 @end
-
