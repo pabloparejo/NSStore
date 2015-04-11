@@ -23,6 +23,7 @@
 
 @interface PARStoreViewController () <UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UIViewControllerTransitioningDelegate, UINavigationControllerDelegate>
 
+@property (strong, nonatomic) UIPercentDrivenInteractiveTransition *interactiveAnimator;
 @end
 
 @implementation PARStoreViewController
@@ -45,8 +46,8 @@
     [self.collectionView registerNib:[UINib nibWithNibName:@"ProductReusableView" bundle:nil] forCellWithReuseIdentifier:CELL_ID];
 }
 
-- (void) viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
+- (void) viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
     self.navigationController.delegate = self;
 }
 
@@ -60,14 +61,6 @@
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    /*
-    NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:0.5
-                                                      target:self
-                                                    selector:@(metodo:)
-                                                    userInfo:nil
-                                                     repeats:YES];
-    [timer invalidate];*/
-    // Dispose of any resources that can be recreated.
 }
 
 #pragma mark - <UICollectionViewDataSource>
@@ -99,6 +92,16 @@
     [cell.textLabel setText:[product objectForKey:NAME_KEY]];
     [cell.priceLabel setText:[product objectForKey:PRICE_KEY]];
     
+    cell.layer.masksToBounds = NO;
+    cell.layer.borderColor = [UIColor whiteColor].CGColor;
+    cell.layer.borderWidth = 1.0f;
+    cell.layer.contentsScale = [UIScreen mainScreen].scale;
+    cell.layer.shadowOpacity = 0.75f;
+    cell.layer.shadowRadius = 2.0f;
+    cell.layer.shadowOffset = CGSizeZero;
+    cell.layer.shadowPath = [UIBezierPath bezierPathWithRect:cell.bounds].CGPath;
+    cell.layer.shouldRasterize = YES;
+    
     
     return cell;
 }
@@ -125,15 +128,21 @@
     
     UICollectionViewCell *cell = [collectionView cellForItemAtIndexPath:indexPath];
     [cell setSelected:YES];
+    
+    UIScreenEdgePanGestureRecognizer *edgeRecognizer = [[UIScreenEdgePanGestureRecognizer alloc] initWithTarget:self
+                                                                                                         action:@selector(edgeGestureRecognized:)];
+    edgeRecognizer.edges = UIRectEdgeLeft;
     NSDictionary *product = [self productForIndexPath:indexPath];
-    PARProductDetailViewController *detailVC = [[PARProductDetailViewController alloc] initWthProduct:product];
+    PARProductDetailViewController *detailVC = [[PARProductDetailViewController alloc] initWthProduct:product recognizer:edgeRecognizer];
     [collectionView deselectItemAtIndexPath:indexPath animated:YES];
-    detailVC.modalPresentationStyle = UIModalPresentationCustom;
     detailVC.transitioningDelegate = self;
     
+    //detailVC.modalPresentationStyle = UIModalPresentationCustom;
     //[self presentViewController:detailVC animated:YES completion:nil];
+    
     [self.navigationController pushViewController:detailVC animated:YES];
 }
+
 
 #pragma mark - Utils
 
@@ -171,4 +180,29 @@
     return animator;
 }
 
+- (void)edgeGestureRecognized:(UIScreenEdgePanGestureRecognizer *)recognizer{
+    // We should add this in detail view
+    
+    float progress = [recognizer translationInView:self.view].x / self.view.frame.size.width;
+    
+    NSLog(@"%f", progress);
+    
+    if (recognizer.state == UIGestureRecognizerStateBegan){
+        self.interactiveAnimator = [UIPercentDrivenInteractiveTransition new];
+        [self.navigationController popViewControllerAnimated:YES];
+    }else if (recognizer.state == UIGestureRecognizerStateChanged){
+        [self.interactiveAnimator updateInteractiveTransition:progress + .05];
+    }else if (recognizer.state == UIGestureRecognizerStateEnded || recognizer.state == UIGestureRecognizerStateCancelled){
+        if (progress > .2) {
+            [self.interactiveAnimator finishInteractiveTransition];
+        }else{
+            [self.interactiveAnimator cancelInteractiveTransition];
+        }
+        self.interactiveAnimator = nil;
+    }
+}
+
+-(id<UIViewControllerInteractiveTransitioning>) navigationController:(UINavigationController *)navigationController interactionControllerForAnimationController:(id<UIViewControllerAnimatedTransitioning>)animationController{
+    return self.interactiveAnimator;
+}
 @end

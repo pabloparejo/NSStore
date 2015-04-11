@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		213BD5071AD9211400207EF3 /* todo in Resources */ = {isa = PBXBuildFile; fileRef = 213BD5061AD9211400207EF3 /* todo */; };
 		21F0A6431AD84329003D71F7 /* PARAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = 21F0A6421AD84329003D71F7 /* PARAnimator.m */; };
 		C58F65561AC6B4B500A58137 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C58F65551AC6B4B500A58137 /* main.m */; };
 		C58F65591AC6B4B500A58137 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C58F65581AC6B4B500A58137 /* AppDelegate.m */; };
@@ -34,6 +35,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		213BD5061AD9211400207EF3 /* todo */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = todo; sourceTree = "<group>"; };
 		21F0A6411AD84329003D71F7 /* PARAnimator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PARAnimator.h; sourceTree = "<group>"; };
 		21F0A6421AD84329003D71F7 /* PARAnimator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PARAnimator.m; sourceTree = "<group>"; };
 		C58F65501AC6B4B500A58137 /* chineseStore.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = chineseStore.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -116,6 +118,7 @@
 				C58F65601AC6B4B500A58137 /* Images.xcassets */,
 				C58F65621AC6B4B500A58137 /* LaunchScreen.xib */,
 				C58F65531AC6B4B500A58137 /* Supporting Files */,
+				213BD5061AD9211400207EF3 /* todo */,
 			);
 			path = chineseStore;
 			sourceTree = "<group>";
@@ -252,6 +255,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				213BD5071AD9211400207EF3 /* todo in Resources */,
 				C58F65851AC6B77800A58137 /* ProductReusableView.xib in Resources */,
 				C58F65641AC6B4B500A58137 /* LaunchScreen.xib in Resources */,
 				C58F65951AC6CD1D00A58137 /* HeaderCollectionReusableView.xib in Resources */,
@@ -426,6 +430,7 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = chineseStoreTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/chineseStore.app/chineseStore";
@@ -441,6 +446,7 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = chineseStoreTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/chineseStore.app/chineseStore";

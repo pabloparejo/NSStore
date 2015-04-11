@@ -7,6 +7,7 @@
 //
 
 #import "PARProductDetailViewController.h"
+#import "PARAnimator.h"
 
 
 #define SECTION_TITLE_KEY @"SECTION_TITLE"
@@ -17,13 +18,21 @@
 
 #define MINLENGTH 12
 
-@interface PARProductDetailViewController ()
+@interface PARProductDetailViewController () <UINavigationControllerDelegate>
 
 @property (nonatomic, copy) NSDictionary *product;
-
+@property (strong, nonatomic) UIScreenEdgePanGestureRecognizer *recognizer;
 @end
 
 @implementation PARProductDetailViewController
+
+-(instancetype) initWthProduct:(NSDictionary *) product recognizer:(UIScreenEdgePanGestureRecognizer *)recognizer{
+    if(self = [super init]){
+        _product = product;
+        _recognizer = recognizer;
+    }
+    return self;
+}
 
 -(instancetype) initWthProduct:(NSDictionary *) product{
     if(self = [super init]){
@@ -43,7 +52,8 @@
     [NSURLConnection sendAsynchronousRequest:imageRequest queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
         [self.imageView setImage:[UIImage imageWithData:data]];
     }];
-        
+
+    [self.view addGestureRecognizer:self.recognizer];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -62,17 +72,10 @@
     }else{
         [self.navigationController popViewControllerAnimated:YES];
     }
-    
 }
 
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+
+
 
 @end

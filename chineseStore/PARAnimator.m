@@ -14,7 +14,7 @@
 
 
 - (NSTimeInterval) transitionDuration:(id<UIViewControllerContextTransitioning>)transitionContext{
-    return 1.0;
+    return .75;
 }
 
 -(void) animateTransition:(id<UIViewControllerContextTransitioning>)transitionContext{
@@ -40,12 +40,11 @@
         fromVCTransform = CGAffineTransformMakeScale(0.75, 0.75);
         [toVC.view.layer setTransform:CATransform3DMakeScale(2.5, 2.5, 2.5)];
     }
-    
-    toVC.view.frame = fromVC.view.frame;
+    toVC.view.frame = [[UIScreen mainScreen] bounds];
     UIViewAnimationOptions options = UIViewAnimationOptionCurveEaseInOut;
     
     toVC.view.alpha = 0.0;
-    [UIView animateWithDuration:1 delay:0 options:options animations:^{
+    [UIView animateWithDuration:.75 delay:0 options:options animations:^{
         fromVC.view.alpha = 0.0;
         fromVC.view.transform = fromVCTransform;
         toVC.view.alpha = 1;

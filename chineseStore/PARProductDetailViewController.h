@@ -11,9 +11,9 @@
 @interface PARProductDetailViewController : UIViewController
 
 -(instancetype) initWthProduct:(NSDictionary *) product;
+-(instancetype) initWthProduct:(NSDictionary *) product recognizer:(UIScreenEdgePanGestureRecognizer *)recognizer;
 
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property (weak, nonatomic) IBOutlet UILabel *priceLabel;
-
 @end
