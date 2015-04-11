@@ -15,6 +15,8 @@
 #define URL_KEY @"URL_KEY"
 #define PRICE_KEY @"PRICE_KEY"
 
+#define MINLENGTH 12
+
 @interface PARProductDetailViewController ()
 
 @property (nonatomic, copy) NSDictionary *product;
@@ -32,9 +34,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = [self.product objectForKey:NAME_KEY];
+    NSString *text = [self.product objectForKey:NAME_KEY];
+    self.title = ([text length]>MINLENGTH ? [[text substringToIndex:MINLENGTH] stringByAppendingString:@"..."] : text);
     [self.titleLabel setText:[self.product objectForKey:NAME_KEY]];
     [self.priceLabel setText:[self.product objectForKey:PRICE_KEY]];
+    [self.priceLabel.layer setCornerRadius:4];
     NSURLRequest *imageRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:[self.product objectForKey:URL_KEY]]];
     [NSURLConnection sendAsynchronousRequest:imageRequest queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
         [self.imageView setImage:[UIImage imageWithData:data]];
@@ -45,6 +49,20 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+- (IBAction)dismissController:(id)sender {
+    /*if (self.navigationController == nil) {
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }else{
+        [self.navigationController popViewControllerAnimated:YES];
+    }*/
+    
+    if (self.presentingViewController) {
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }else{
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+    
 }
 
 /*

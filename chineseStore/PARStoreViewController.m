@@ -10,6 +10,7 @@
 #import "ProductReusableView.h"
 #import "PARProductDetailViewController.h"
 #import "HeaderCollectionReusableView.h"
+#import "PARAnimator.h"
 
 #define SECTION_TITLE_KEY @"SECTION_TITLE"
 #define PRODUCTS_KEY @"PRODUCTS_KEY"
@@ -20,7 +21,7 @@
 #define CELL_ID @"CELL_ID"
 #define HEADER_ID @"HEADER_ID"
 
-@interface PARStoreViewController () <UICollectionViewDelegateFlowLayout, UICollectionViewDataSource>
+@interface PARStoreViewController () <UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UIViewControllerTransitioningDelegate, UINavigationControllerDelegate>
 
 @end
 
@@ -42,6 +43,19 @@
     [self.collectionView setDelegate:self];
     [self.collectionView registerNib:[UINib nibWithNibName:@"HeaderCollectionReusableView" bundle:nil] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:HEADER_ID];
     [self.collectionView registerNib:[UINib nibWithNibName:@"ProductReusableView" bundle:nil] forCellWithReuseIdentifier:CELL_ID];
+}
+
+- (void) viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    self.navigationController.delegate = self;
+}
+
+-(void)viewDidDisappear:(BOOL)animated{
+    [super viewDidDisappear:animated];
+    /*if (self.navigationController.delegate == self) {
+        self.navigationController.delegate = nil;
+    }*/
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -105,7 +119,7 @@
     return nil;
 }
 
-#pragma mark - <UICollectionViewDelegate>
+#pragma mark - <UICollectionViewDelegateFlowLayout>
 
 -(void) collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     
@@ -114,13 +128,47 @@
     NSDictionary *product = [self productForIndexPath:indexPath];
     PARProductDetailViewController *detailVC = [[PARProductDetailViewController alloc] initWthProduct:product];
     [collectionView deselectItemAtIndexPath:indexPath animated:YES];
-    //[self.navigationController pushViewController:detailVC animated:YES];
+    detailVC.modalPresentationStyle = UIModalPresentationCustom;
+    detailVC.transitioningDelegate = self;
+    
+    //[self presentViewController:detailVC animated:YES completion:nil];
+    [self.navigationController pushViewController:detailVC animated:YES];
 }
 
 #pragma mark - Utils
 
 -(NSDictionary *) productForIndexPath:(NSIndexPath *) indexPath{
     return [[[self.model objectAtIndex:indexPath.section] objectForKey:PRODUCTS_KEY]objectAtIndex:indexPath.row];
+}
+
+#pragma mark - UIViewControllerTransitioningDelegate
+
+-(id<UIViewControllerAnimatedTransitioning>) animationControllerForPresentedController:(UIViewController *)presented presentingController:(UIViewController *)presenting sourceController:(UIViewController *)source{
+    PARAnimator *animator = [PARAnimator new];
+    [animator setAnimationType: AnimatorPresent];
+    return animator;
+}
+
+-(id<UIViewControllerAnimatedTransitioning>) animationControllerForDismissedController:(UIViewController *)dismissed{
+    PARAnimator *animator = [PARAnimator new];
+    [animator setAnimationType: AnimatorDismiss];
+    return animator;
+}
+
+-(id<UIViewControllerAnimatedTransitioning>) navigationController:(UINavigationController *)navigationController
+                                  animationControllerForOperation:(UINavigationControllerOperation)operation
+                                               fromViewController:(UIViewController *)fromVC
+                                                 toViewController:(UIViewController *)toVC {
+    
+    PARAnimator *animator = [PARAnimator new];
+    if (operation == UINavigationControllerOperationPush) {
+        [animator setAnimationType:AnimatorPush];
+    }else if (operation == UINavigationControllerOperationPop){
+        [animator setAnimationType:AnimatorPop];
+    }else{
+        return nil;
+    }
+    return animator;
 }
 
 @end

@@ -60,7 +60,7 @@
 -(NSArray *) buildModel{
     NSDictionary *shoes = @{SECTION_TITLE_KEY: @"Hogar y moda",
                             PRODUCTS_KEY:@[
-                                    @{NAME_KEY: @"De las zapatillas de pies de cuero de las confortables",
+                                    @{NAME_KEY: @"Zapatillas de pies de cuero de las confortables",
                                       URL_KEY: @"http://www.minutodigital.com/wp-content/uploads/image001.jpg",
                                       PRICE_KEY: @"12.99€"},
                                     @{NAME_KEY: @"Wrongulator",
@@ -119,9 +119,10 @@
     
     [[UINavigationBar appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName:yellowColor}
      ];
+    UIColor *redColor = [UIColor colorWithRed:.41 green:0 blue:0 alpha:1];
+    [[UINavigationBar appearance] setTintColor:redColor];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     [self.window setBackgroundColor:yellowColor];
-    
 }
 
 

@@ -8,6 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
+typedef enum {
+    AnimatorPresent,
+    AnimatorDismiss,
+    AnimatorPush,
+    AnimatorPop
+} AnimationType;
+
 @interface PARAnimator : NSObject<UIViewControllerAnimatedTransitioning>
+
+@property (nonatomic) AnimationType animationType;
 
 @end
