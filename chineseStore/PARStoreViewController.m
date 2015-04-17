@@ -92,16 +92,6 @@
     [cell.textLabel setText:[product objectForKey:NAME_KEY]];
     [cell.priceLabel setText:[product objectForKey:PRICE_KEY]];
     
-    cell.layer.masksToBounds = NO;
-    cell.layer.borderColor = [UIColor whiteColor].CGColor;
-    cell.layer.borderWidth = 1.0f;
-    cell.layer.contentsScale = [UIScreen mainScreen].scale;
-    cell.layer.shadowOpacity = 0.75f;
-    cell.layer.shadowRadius = 2.0f;
-    cell.layer.shadowOffset = CGSizeZero;
-    cell.layer.shadowPath = [UIBezierPath bezierPathWithRect:cell.bounds].CGPath;
-    cell.layer.shouldRasterize = YES;
-    
     
     return cell;
 }
