@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ProductReusableView.h"
 
 @interface PARStoreViewController : UIViewController
 
@@ -15,5 +16,5 @@
 - (instancetype) initWithModel:(NSArray *)model;
 
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
-
+@property (strong, nonatomic)  ProductReusableView *selectedCell;
 @end

@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ProductReusableView.h"
 
 typedef enum {
     AnimatorPresent,
@@ -18,5 +19,5 @@ typedef enum {
 @interface PARAnimator : NSObject<UIViewControllerAnimatedTransitioning>
 
 @property (nonatomic) AnimationType animationType;
-
+@property (nonatomic) ProductReusableView *cell;
 @end

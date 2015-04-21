@@ -24,6 +24,7 @@
 @interface PARStoreViewController () <UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UIViewControllerTransitioningDelegate, UINavigationControllerDelegate>
 
 @property (strong, nonatomic) UIPercentDrivenInteractiveTransition *interactiveAnimator;
+
 @end
 
 @implementation PARStoreViewController
@@ -49,6 +50,7 @@
 - (void) viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
     self.navigationController.delegate = self;
+    self.selectedCell = nil;
 }
 
 -(void)viewDidDisappear:(BOOL)animated{
@@ -91,7 +93,7 @@
     
     [cell.textLabel setText:[product objectForKey:NAME_KEY]];
     [cell.priceLabel setText:[product objectForKey:PRICE_KEY]];
-    
+
     
     return cell;
 }
@@ -116,9 +118,10 @@
 
 -(void) collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     
-    UICollectionViewCell *cell = [collectionView cellForItemAtIndexPath:indexPath];
+    ProductReusableView *cell = (ProductReusableView *)[collectionView cellForItemAtIndexPath:indexPath];
     [cell setSelected:YES];
-    
+    self.selectedCell = cell;
+
     UIScreenEdgePanGestureRecognizer *edgeRecognizer = [[UIScreenEdgePanGestureRecognizer alloc] initWithTarget:self
                                                                                                          action:@selector(edgeGestureRecognized:)];
     edgeRecognizer.edges = UIRectEdgeLeft;
@@ -131,6 +134,18 @@
     //[self presentViewController:detailVC animated:YES completion:nil];
     
     [self.navigationController pushViewController:detailVC animated:YES];
+}
+
+-(CGSize) collectionView:(UICollectionView *)collectionView
+                  layout:(UICollectionViewLayout *)collectionViewLayout
+  sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
+    NSUInteger cellsPerRow = 0;
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad){
+        cellsPerRow = 3;
+    }else{
+        cellsPerRow = 2;
+    }
+    return CGSizeMake(self.collectionView.frame.size.width/cellsPerRow - 12, self.collectionView.frame.size.width/cellsPerRow);
 }
 
 
