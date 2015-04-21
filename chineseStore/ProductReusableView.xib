@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7531" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -11,45 +11,54 @@
             <rect key="frame" x="0.0" y="0.0" width="174" height="200"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="n79-We-p7s">
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="n79-We-p7s">
                     <rect key="frame" x="0.0" y="0.0" width="174" height="200"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
                     <color key="backgroundColor" red="1" green="0.70723862849999997" blue="0.28181549080000001" alpha="1" colorSpace="calibratedRGB"/>
                 </imageView>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="price" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="7qE-kM-gC7">
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="price" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7qE-kM-gC7">
                     <rect key="frame" x="111" y="6" width="57" height="25"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.84999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="57" id="3oX-0D-Qjd"/>
+                        <constraint firstAttribute="height" constant="25" id="h94-jZ-2k7"/>
+                    </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <color key="textColor" red="0.41176470590000003" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="whiteLarge" id="Zrt-EY-7aB">
+                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="Zrt-EY-7aB">
                     <rect key="frame" x="69" y="66" width="37" height="37"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </activityIndicatorView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="udr-x0-j3K">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="udr-x0-j3K">
                     <rect key="frame" x="0.0" y="170" width="174" height="30"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES"/>
                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.97999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="IcJ-9U-yXA"/>
+                    </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <color key="textColor" red="0.11764705882352941" green="0.11764705882352941" blue="0.11764705882352941" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="n79-We-p7s" secondAttribute="trailing" id="8kS-T6-xlP"/>
+                <constraint firstAttribute="trailing" secondItem="7qE-kM-gC7" secondAttribute="trailing" constant="6" id="DZm-XI-tVv"/>
+                <constraint firstItem="n79-We-p7s" firstAttribute="top" secondItem="U6b-Vx-4bR" secondAttribute="top" id="RJv-Ec-05Z"/>
+                <constraint firstAttribute="bottom" secondItem="n79-We-p7s" secondAttribute="bottom" id="UfD-as-M3x"/>
+                <constraint firstAttribute="bottom" secondItem="udr-x0-j3K" secondAttribute="bottom" id="dVE-Ea-M8u"/>
+                <constraint firstItem="udr-x0-j3K" firstAttribute="leading" secondItem="U6b-Vx-4bR" secondAttribute="leading" id="eqn-sc-EwK"/>
+                <constraint firstItem="7qE-kM-gC7" firstAttribute="top" secondItem="U6b-Vx-4bR" secondAttribute="top" constant="6" id="nKX-c1-iyw"/>
+                <constraint firstItem="n79-We-p7s" firstAttribute="leading" secondItem="U6b-Vx-4bR" secondAttribute="leading" id="sTv-xS-nF6"/>
+                <constraint firstAttribute="trailing" secondItem="udr-x0-j3K" secondAttribute="trailing" id="y4n-Fp-VOM"/>
+            </constraints>
             <connections>
                 <outlet property="imageView" destination="n79-We-p7s" id="Bbb-TV-1El"/>
                 <outlet property="loading" destination="Zrt-EY-7aB" id="eaU-a8-k1Q"/>
                 <outlet property="priceLabel" destination="7qE-kM-gC7" id="nsO-eS-Sxm"/>
                 <outlet property="textLabel" destination="udr-x0-j3K" id="Xyu-AM-AFz"/>
             </connections>
-            <point key="canvasLocation" x="373" y="439"/>
+            <point key="canvasLocation" x="399" y="463"/>
         </collectionReusableView>
     </objects>
-    <simulatedMetricsContainer key="defaultSimulatedMetrics">
-        <simulatedStatusBarMetrics key="statusBar"/>
-        <simulatedOrientationMetrics key="orientation"/>
-        <simulatedScreenMetrics key="destination" type="retina4"/>
-    </simulatedMetricsContainer>
 </document>
