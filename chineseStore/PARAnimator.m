@@ -32,12 +32,13 @@
     // Crea la situación inicial
     if (self.animationType != AnimatorDismiss) {
         [contextView insertSubview:toVC.view belowSubview:fromVC.view];
+        [toVC.view layoutIfNeeded];
     }
     
     UIImageView *cellImage = nil;
     if (self.animationType == AnimatorPresent || self.animationType == AnimatorPush) {
         [toVC.view setTransform:CGAffineTransformMakeTranslation(0, 0)];
-        fromVCTransform = CGAffineTransformMakeTranslation(-200, 0);
+        //fromVCTransform = CGAffineTransformMakeTranslation(-200, 0);
         ProductReusableView *selectedCell = [(PARStoreViewController *) fromVC selectedCell];
         [[((PARProductDetailViewController *) toVC) imageView] setAlpha:0];
         
@@ -46,7 +47,7 @@
         [cellImage setClipsToBounds:YES];
         cellImage.frame = selectedCell.frame;
     }else{
-        fromVCTransform = CGAffineTransformMakeTranslation(200, 0);
+        //fromVCTransform = CGAffineTransformMakeTranslation(200, 0);
         [toVC.view.layer setTransform:CATransform3DMakeScale(2.5, 2.5, 2.5)];
     }
     [contextView insertSubview:cellImage aboveSubview:toVC.view];

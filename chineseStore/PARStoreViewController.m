@@ -145,7 +145,12 @@
     }else{
         cellsPerRow = 2;
     }
-    return CGSizeMake(self.collectionView.frame.size.width/cellsPerRow - 12, self.collectionView.frame.size.width/cellsPerRow);
+    return CGSizeMake(self.collectionView.frame.size.width/cellsPerRow - 12,
+                      self.collectionView.frame.size.width/cellsPerRow);
+}
+
+-(void) viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator{
+    
 }
 
 
